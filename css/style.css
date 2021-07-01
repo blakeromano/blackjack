@@ -1,0 +1,16 @@
+body {
+    height: 98vh;
+}
+div#prompt-div {
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+form#prompt-form {
+    display: inline-block;
+    text-align: center;
+    border: solid black 3px;
+    width: fit-content;
+    flex-direction: columnn;
+}

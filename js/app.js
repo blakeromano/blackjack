@@ -13,3 +13,29 @@
 // 12) Have a reset everything button which will reload the game so user can input a wallet balance again etc;
 // 13) Add event listeners for buttons to start game, startround, hit, split, doubledown, stand, new round buttons and invoke the needed functions in the eventlistener.  
 // CHALLENGES: If possible I would like to add the following to BlackJack: AI Users to play with, ability to split hand, Card animations for dealing and shuffling with noises, a timer for user to have to select option, Add time between card's being dealt to add some realism
+
+// Variables
+let wallet = 0
+
+// Cached Reference Elements
+let promptFormEl = document.querySelector("#prompt-form")
+let promptInputEl = document.querySelector("#prompt-input")
+let promptMessageEl = document.querySelector("#prompt-message")
+let promptDivEl = document.querySelector("#prompt-div")
+
+// Event Listeners
+promptFormEl.addEventListener("submit", function (e) {
+    e.preventDefault()
+    let walletInput = Number(promptInputEl.value)
+    if (walletInput > 1000000 || walletInput < 50) {
+        promptMessageEl.innerHTML = "Invalid Input! Please input a number between 50 and 1,000,000"
+    } else {
+        promptDivEl.toggleAttribute("hidden", "true")
+        wallet = wallet + walletInput
+        console.log(wallet)
+    }
+})
+
+
+
+// Functions
