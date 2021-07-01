@@ -1,16 +1,41 @@
-body {
-    height: 98vh;
-}
-div#prompt-div {
+* {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    background: rgb(26, 26, 26);
+  }
+  .container {
     height: 90vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-form#prompt-form {
-    display: inline-block;
+    perspective: 700px;
+  }
+  .blackjack-table {
+    position: relative;
+    clip-path: ellipse(95% 70vh at 50% 40px);
+    transform: rotateX(30deg);
+    overflow: hidden;
+    background: green;
+    height: 100%;
+    width: 80vw;
+    margin: 0 auto;
+    
+  }
+  .table-overlay {
+    color: #fff;
+    width: 100%;
+    height: 100%;
+    position: absolute;
     text-align: center;
-    border: solid black 3px;
-    width: fit-content;
-    flex-direction: columnn;
+    padding-top: 4rem;
+    font-size: 3vw;
+  }
+  #betting-menu {
+      align-items: flex-end;
+      width: max-content;
+      text-align: center;
+      padding: 5px;
+      border: white 5px solid;
+      color: white;
 }
