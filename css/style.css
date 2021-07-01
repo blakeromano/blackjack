@@ -10,15 +10,16 @@
   .container {
     height: 90vh;
     perspective: 700px;
+    margin-top: -50px;
   }
   .blackjack-table {
     position: relative;
-    clip-path: ellipse(95% 70vh at 50% 40px);
+    clip-path: ellipse(85% 70vh at 50% 40px);
     transform: rotateX(30deg);
     overflow: hidden;
     background: green;
     height: 100%;
-    width: 80vw;
+    width: 75vw;
     margin: 0 auto;
     
   }
@@ -37,21 +38,25 @@
       align-items: flex-end;
       width: max-content;
       text-align: center;
-      padding: 5px;
+      padding: 10px;
       border: white 5px solid;
       color: white;
       background-color: gray;
 }
     #dealers-hand {
-        
+        margin-top: -200px;
         border: red dotted 3px;
         height: 100px;
-        width: 200px;
+        width: 300px;
+        margin-bottom: -150px;
+        visibility: hidden;
     }
     #players-hand{
+        margin-top: -100px;
         border: 3px dashed blue;
         height: 100px;
-        width: 200px;
+        width: 300px;
+        visibility: hidden;
     }
     .controls {
         display: flex;
@@ -74,9 +79,11 @@
     justify-content: center;
     }
     .chips {
-        width: 50px;
-        height: 50px;
+        width: 75px;
+        height: 75px;
     }
+
+
     .card {
         box-sizing: border-box;
         display: inline-block;

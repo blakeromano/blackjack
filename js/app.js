@@ -17,6 +17,10 @@
 // Variables
 let wallet = 10000
 let bet = null
+let deck = [[], [], [], [], []]
+let playersHand = []
+let dealershand =[]
+
 
 // Cached Reference Elements
 let currentBalMesEl = document.querySelector("#current-balance")
@@ -41,19 +45,35 @@ resetBetBtnEl.addEventListener("click", () => {
     currentBetBalEl.innerHTML = `Your current Bet Balance is: $${bet}`
 })
 betSubmitEl.addEventListener("click", ()=> {
-    if (bet < 50) {
-        currentBetBalEl.innerHTML = `You can't Place a Bet less than $50! Add more money!`
-    }else if (bet > wallet) {
-        currentBetBalEl.innerHTML = `You can't bet more money then you have!`
-    } else{
-    betDivEl.style.visibility = "hidden"
-    wallet = wallet - bet
-    playersChoices.forEach(btn => {
-        btn.style.visibility = "inherit"
-    })
-    }
+init()
 })
 
 
 
 // Functions
+function init () {
+    if (bet < 50) {
+        currentBetBalEl.innerHTML = `You can't Place a Bet less than $50! Add more money!`
+    }else if (bet > wallet) {
+        currentBetBalEl.innerHTML = `You can't bet more money then you have!`
+    } else{
+    deck = [
+    ["dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"],
+    ["dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"],
+    ["dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"],
+    ["dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"],
+    ["dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"]
+    ]
+    dealersHandEl.style.visibility = "inherit"
+    playersHandEl.style.visibility = "inherit"
+    betDivEl.style.visibility = "hidden"
+    dealersHandEl.visibility = "inherit"
+    playersHandEl.visibility = "inherit"
+    wallet = wallet - bet
+    playersChoices.forEach(btn => {
+        btn.style.visibility = "inherit"
+    })
+    }
+}
+
+
