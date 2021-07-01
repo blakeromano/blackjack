@@ -47,6 +47,7 @@ betSubmitEl.addEventListener("click", ()=> {
         currentBetBalEl.innerHTML = `You can't bet more money then you have!`
     } else{
     betDivEl.style.visibility = "hidden"
+    wallet = wallet - bet
     playersChoices.forEach(btn => {
         btn.style.visibility = "inherit"
     })
