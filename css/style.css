@@ -54,14 +54,23 @@
         width: 200px;
     }
     .controls {
-        margin-top: 160px;
-        border: orange 5px solid;
+        display: flex;
+        /* margin-top: 60px;   */
+        justify-content: center;
     }
     .players-choices {
     visibility: hidden;
     position: relative;
-    width: 50px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 5px;
+    margin: 5px;
+    width: 100px;
     height: 50px;
+    border: 3px outset whitesmoke;
+    border-radius: 15px;
+    background-color: black;
+    color: whitesmoke;
     justify-content: center;
     }
     .chips {
