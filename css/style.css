@@ -5,7 +5,7 @@
     box-sizing: border-box;
   }
   body {
-    background: rgb(26, 26, 26);
+    background: rgb(0, 0, 0);
   }
   .container {
     height: 90vh;
@@ -30,6 +30,8 @@
     text-align: center;
     padding-top: 4rem;
     font-size: 3vw;
+    display: grid;
+    justify-content: center;
   }
   #betting-menu {
       align-items: flex-end;
@@ -38,4 +40,31 @@
       padding: 5px;
       border: white 5px solid;
       color: white;
+      background-color: gray;
 }
+    #dealers-hand {
+        
+        border: red dotted 3px;
+        height: 100px;
+        width: 200px;
+    }
+    #players-hand{
+        border: 3px dashed blue;
+        height: 100px;
+        width: 200px;
+    }
+    .controls {
+        margin-top: 160px;
+        border: orange 5px solid;
+    }
+    .players-choices {
+    visibility: hidden;
+    position: relative;
+    width: 100px;
+    height: 100px;
+    justify-content: center;
+    }
+    .chips {
+        width:100px;
+        height: 100px;
+    }

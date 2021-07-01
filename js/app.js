@@ -16,12 +16,42 @@
 
 // Variables
 let wallet = 10000
+let bet = null
 
 // Cached Reference Elements
-
+let currentBalMesEl = document.querySelector("#current-balance")
+let betInputEl = document.querySelector('#bet-input')
+let betSubmitEl = document.querySelector("#bet-submit")
+let dealersHandEl = document.querySelector("#dealers-hand")
+let playersHandEl = document.querySelector("#players-hand")
+let betDivEl = document.querySelector("#betting-menu")
+let chipSectionEl = document.querySelector("#chip-section")
+let currentBetBalEl = document.querySelector("#current-bet-balance")
+let resetBetBtnEl = document.querySelector("#bet-reset")
+let playersChoices = document.querySelectorAll(".players-choices")
 
 // Event Listeners
-
+chipSectionEl.addEventListener("click", function(el) {
+    let chipSelected = Number(el.target.id)
+    bet = chipSelected + bet
+    currentBetBalEl.innerHTML = `Your current Bet Balance is: $${bet}`
+})
+resetBetBtnEl.addEventListener("click", () => {
+    bet = 0
+    currentBetBalEl.innerHTML = `Your current Bet Balance is: $${bet}`
+})
+betSubmitEl.addEventListener("click", ()=> {
+    if (bet < 50) {
+        currentBetBalEl.innerHTML = `You can't Place a Bet less than $50! Add more money!`
+    }else if (bet > wallet) {
+        currentBetBalEl.innerHTML = `You can't bet more money then you have!`
+    } else{
+    betDivEl.style.visibility = "hidden"
+    playersChoices.forEach(btn => {
+        btn.style.visibility = "inherit"
+    })
+    }
+})
 
 
 
