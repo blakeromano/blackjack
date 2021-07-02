@@ -217,5 +217,7 @@ function push () {
 
 }
 function dealerPlay() {
-
+playersChoices.forEach(btn => {
+    btn.style.visibility = "hidden"
+})
 }
