@@ -18,10 +18,13 @@
 let wallet = 10000
 let bet = null
 let deck = [[], [], [], [], []]
-let playersHand = []
-let dealershand =[]
-
-
+let playersHandValue = null
+let dealersHandValue = null
+let card = ""
+let newDiv
+let mysteryCard
+let cardValue = null
+let theyDoubledDown = false
 // Cached Reference Elements
 let currentBalMesEl = document.querySelector("#current-balance")
 let betInputEl = document.querySelector('#bet-input')
@@ -33,6 +36,7 @@ let chipSectionEl = document.querySelector("#chip-section")
 let currentBetBalEl = document.querySelector("#current-bet-balance")
 let resetBetBtnEl = document.querySelector("#bet-reset")
 let playersChoices = document.querySelectorAll(".players-choices")
+let controlsEl = document.querySelector(".controls")
 
 // Event Listeners
 chipSectionEl.addEventListener("click", function(el) {
@@ -45,9 +49,19 @@ resetBetBtnEl.addEventListener("click", () => {
     currentBetBalEl.innerHTML = `Your current Bet Balance is: $${bet}`
 })
 betSubmitEl.addEventListener("click", ()=> {
-init()
+    init()
+    initalCardDealing()
 })
-
+controlsEl.addEventListener("click", (el) => {
+    let playerAction = el.target.id
+    if (playerAction === "hit-btn") {
+    playerHit()
+    } else if (playerAction === "stand-btn") {
+    playerStand()
+    } else if (playerAction === "double-down-btn") {
+    playerDoubleDown()
+    } else {}
+})
 
 
 // Functions
@@ -57,23 +71,151 @@ function init () {
     }else if (bet > wallet) {
         currentBetBalEl.innerHTML = `You can't bet more money then you have!`
     } else{
+    dealersHandEl.style.visibility = "inherit"
+    playersHandEl.style.visibility = "inherit"
+    betDivEl.style.visibility = "hidden"
+    wallet = wallet - bet
+    playersChoices.forEach(btn => {
+        btn.style.visibility = "inherit"
+    })
     deck = [
     ["dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"],
     ["dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"],
     ["dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"],
     ["dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"],
-    ["dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"]
+    ["dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"],
+    ["dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"],
     ]
-    dealersHandEl.style.visibility = "inherit"
-    playersHandEl.style.visibility = "inherit"
-    betDivEl.style.visibility = "hidden"
-    dealersHandEl.visibility = "inherit"
-    playersHandEl.visibility = "inherit"
-    wallet = wallet - bet
-    playersChoices.forEach(btn => {
-        btn.style.visibility = "inherit"
-    })
     }
 }
 
+function pickCard() {
+    let deckPickedIdx = Math.floor(Math.random() * deck.length)
+    let cardPickedIdx = Math.floor(Math.random() * deck[deckPickedIdx].length)
+    card = deck[deckPickedIdx][cardPickedIdx]
+    deck[deckPickedIdx].splice(cardPickedIdx, 1)
+}
 
+function initalCardDealing() {
+ pickCard()
+ determineCardValue(card)
+ dealersHandValue = dealersHandValue + cardValue
+ makeNewCardDiv("dealer")
+ newDiv.classList.add(card)
+ pickCard()
+ determineCardValue(card)
+ playersHandValue = playersHandValue + cardValue
+ makeNewCardDiv("player")
+ newDiv.classList.add(card)
+ pickCard()
+ determineCardValue(card)
+ dealersHandValue = dealersHandValue + cardValue
+ makeNewCardDiv("dealer")
+ mysteryCard = card
+ if (card.includes("d") || card.includes("h")) {
+     newDiv.classList.add("back-red")
+ } else if (card.includes("c") || card.includes("s")) {
+     newDiv.classList.add("back-blue")
+ }
+ pickCard()
+ determineCardValue(card)
+ playersHandValue = playersHandValue + cardValue
+ makeNewCardDiv("player")
+ newDiv.classList.add(card)
+ console.log(playersHandValue)
+ console.log(dealersHandValue)
+ if (playersHandValue === 21) {
+     console.log("BLACKJACK")
+ }
+}
+
+function makeNewCardDiv (personRecievingCard) {
+    newDiv = document.createElement("div")
+    if (personRecievingCard === "player") {
+        playersHandEl.appendChild(newDiv)
+        newDiv.classList.add("card", "large")
+    } else if (personRecievingCard === "dealer") {
+        dealersHandEl.appendChild(newDiv)
+        newDiv.classList.add("card", "large")
+    }
+}
+
+function determineCardValue (card) {
+    if (card === "dA" || card === "hA" || card ==="cA" || card === "sA"){
+        cardValue = 11;
+    }
+    if (card === "dQ" || card === "hQ" || card === "cQ" || card === "sQ" ||
+        card === "dK" || card === "hK" || card === "cK" || card === "sK" ||
+        card === "dJ" || card === "hJ" || card === "cJ" || card === "sJ" ||
+        card === "d10" || card === "h10" || card === "c10" || card === "s10"){
+        cardValue = 10;
+    }
+    if (card === "d09" || card === "h09" || card ==="c09" || card === "s09"){
+        cardValue = 9;
+    }
+    if (card === "d08" || card === "h08" || card ==="c08" || card === "s08"){
+        cardValue = 8;
+    }
+    if (card === "d07" || card === "h07" || card ==="c07" || card === "s07"){
+        cardValue = 7;
+    }
+    if (card === "d06" || card === "h06" || card ==="c06" || card === "s06"){
+        cardValue = 6;
+    }
+    if (card === "d05" || card === "h05" || card ==="c05" || card === "s05"){
+        cardValue = 5;
+    }
+    if (card === "d04" || card === "h04" || card ==="c04" || card === "s04"){
+        cardValue = 4;
+    }
+    if (card === "d03" || card === "h03" || card ==="c03" || card === "s03"){
+        cardValue = 3;
+    }
+    if (card === "d02" || card === "h02" || card ==="c02" || card === "s02"){
+        cardValue = 2;
+    }    
+    return cardValue;
+
+}
+function playerHit () {
+    pickCard()
+    makeNewCardDiv("player")
+    newDiv.classList.add(card)
+    determineCardValue(card)
+    playersHandValue = playersHandValue + cardValue
+    if (playersHandValue > 21) {
+        console.log("BUST")
+        playerLose()
+    } else {}
+    }
+function playerStand () {
+dealerPlay()
+}
+function playerDoubleDown() {
+    wallet = wallet - bet
+    theyDoubledDown = true
+    console.log(wallet)
+    pickCard()
+    makeNewCardDiv("player")
+    newDiv.classList.add(card)
+    determineCardValue(card)
+    playersHandValue = playersHandValue + cardValue
+    if (playersHandValue > 21) {
+        console.log("BUST")
+        playerLose()
+    } else {
+    dealerPlay()
+    }
+}
+function playerWin () {
+
+}
+function playerLose () {
+
+}
+function push () {
+
+}
+function dealerPlay() {
+
+}
