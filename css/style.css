@@ -46,16 +46,16 @@
     #dealers-hand {
         margin-top: -200px;
         border: red dotted 3px;
-        height: 100px;
-        width: 300px;
+        height: 125px;
+        width: 600px;
         margin-bottom: -150px;
         visibility: hidden;
     }
     #players-hand{
-        margin-top: -100px;
+        margin-top: -200px;
         border: 3px dashed blue;
-        height: 100px;
-        width: 300px;
+        height: 125px;
+        width: 600px;
         visibility: hidden;
     }
     .controls {
@@ -114,7 +114,7 @@
         .card.small {
           font-size: 12px; }
         .card.large {
-          font-size: 26px; }
+          font-size: 20px; }
         .card.xlarge {
           font-size: 42px; }
         .card.no-border {
