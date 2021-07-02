@@ -14,10 +14,15 @@
 // 13) Add event listeners for buttons to start game, startround, hit, split, doubledown, stand, new round buttons and invoke the needed functions in the eventlistener.  
 // CHALLENGES: If possible I would like to add the following to BlackJack: AI Users to play with, ability to split hand, Card animations for dealing and shuffling with noises, a timer for user to have to select option, Add time between card's being dealt to add some realism
 
+
+
+// NOTE: ace should be a save card where if the player/dealer has one but their value is over 21 that the value of their deck gets decreased by 10 next to work on
 // Variables
 let wallet = 10000
 let bet = null
 let deck = [[], [], [], [], []]
+let playersHand = []
+let dealersHand = []
 let playersHandValue = null
 let dealersHandValue = null
 let card = ""
@@ -27,6 +32,7 @@ let cardValue = null
 let theyDoubledDown = false
 let playerBust = false
 let dealerBust = false
+let blackjack = false
 // Cached Reference Elements
 let currentBalMesEl = document.querySelector("#current-balance")
 let betInputEl = document.querySelector('#bet-input')
@@ -100,16 +106,19 @@ function pickCard() {
 
 function initalCardDealing() {
     pickCard()
+    dealersHand.push(card)
     determineCardValue(card)
     dealersHandValue = dealersHandValue + cardValue
     makeNewCardDiv("dealer")
     newDiv.classList.add(card)
     pickCard()
+    playersHand.push(card)
     determineCardValue(card)
     playersHandValue = playersHandValue + cardValue
     makeNewCardDiv("player")
     newDiv.classList.add(card)
     pickCard()
+    dealersHand.push(card)
     determineCardValue(card)
     dealersHandValue = dealersHandValue + cardValue
     makeNewCardDiv("dealer")
@@ -120,6 +129,7 @@ function initalCardDealing() {
         newDiv.classList.add("back-blue", "mystery-card")
     }
     pickCard()
+    playersHand.push(card)
     determineCardValue(card)
     playersHandValue = playersHandValue + cardValue
     makeNewCardDiv("player")
@@ -127,7 +137,8 @@ function initalCardDealing() {
     console.log(playersHandValue)
     console.log(dealersHandValue)
     if (playersHandValue === 21) {
-        console.log("BLACKJACK")
+        blackjack = true
+        playerWin()
     }
 }
 
@@ -179,6 +190,7 @@ function determineCardValue (card) {
     return cardValue;
     
 }
+// has player take a new card 
 function playerHit () {
     pickCard()
     makeNewCardDiv("player")
@@ -190,9 +202,11 @@ function playerHit () {
         playerLose()
     }
 }
+// forces dealer to play
 function playerStand () {
     dealerPlay()
 }
+// doubles player bet and automatically makes them stand after hitting
 function playerDoubleDown() {
     wallet = wallet - bet
     theyDoubledDown = true
@@ -209,15 +223,19 @@ function playerDoubleDown() {
         dealerPlay()
     }
 }
+// Shows that player won
 function playerWin () {
     messageEl.innerHTML = "PLAYER WINS!"
 }
+// Shows that player lost
 function playerLose () {
     messageEl.innerHTML = "DEALER WINS!"
 }
+// Shows that player tied with dealer AKA pushed
 function push () {
     messageEl.innerHTML = "PUSH!"
 }
+// Dealer has to play once player stands or if they double down, only done if player hasn't busted
 function dealerPlay() {
     playersChoices.forEach(btn => {
         btn.style.visibility = "hidden"
@@ -226,6 +244,7 @@ function dealerPlay() {
     mysteryCardEl.remove()
     makeNewCardDiv("dealer")
     newDiv.classList.add(mysteryCard)
+    // Makes dealer pick a card until the value of their hand is over 17
     while (dealersHandValue <= 17) {
         pickCard()
         determineCardValue(card)
@@ -242,7 +261,7 @@ function dealerPlay() {
     determineWinner()
     }
 }
-
+// Determines winner if neither dealer or player bust
 function determineWinner() {
     if (dealersHandValue > playersHandValue) {
         playerLose()
@@ -252,4 +271,3 @@ function determineWinner() {
         push()
     }
 }
-console.log(messageEl)
