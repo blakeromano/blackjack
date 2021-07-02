@@ -82,6 +82,10 @@
         width: 75px;
         height: 75px;
     }
+    #message {
+      color: white;
+      font-size: 48px;
+    }
 
 
     .card {

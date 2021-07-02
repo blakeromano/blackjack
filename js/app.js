@@ -25,6 +25,8 @@ let newDiv
 let mysteryCard
 let cardValue = null
 let theyDoubledDown = false
+let playerBust = false
+let dealerBust = false
 // Cached Reference Elements
 let currentBalMesEl = document.querySelector("#current-balance")
 let betInputEl = document.querySelector('#bet-input')
@@ -37,6 +39,7 @@ let currentBetBalEl = document.querySelector("#current-bet-balance")
 let resetBetBtnEl = document.querySelector("#bet-reset")
 let playersChoices = document.querySelectorAll(".players-choices")
 let controlsEl = document.querySelector(".controls")
+let messageEl = document.querySelector("#message")
 // Event Listeners
 chipSectionEl.addEventListener("click", function(el) {
     let chipSelected = Number(el.target.id)
@@ -183,9 +186,9 @@ function playerHit () {
     determineCardValue(card)
     playersHandValue = playersHandValue + cardValue
     if (playersHandValue > 21) {
-        console.log("BUST")
+        playerBust = true
         playerLose()
-    } else {}
+    }
 }
 function playerStand () {
     dealerPlay()
@@ -200,20 +203,20 @@ function playerDoubleDown() {
     determineCardValue(card)
     playersHandValue = playersHandValue + cardValue
     if (playersHandValue > 21) {
-        console.log("BUST")
+        playerBust = true
         playerLose()
     } else {
         dealerPlay()
     }
 }
 function playerWin () {
-    
+    messageEl.innerHTML = "PLAYER WINS!"
 }
 function playerLose () {
-    
+    messageEl.innerHTML = "DEALER WINS!"
 }
 function push () {
-    
+    messageEl.innerHTML = "PUSH!"
 }
 function dealerPlay() {
     playersChoices.forEach(btn => {
@@ -224,15 +227,29 @@ function dealerPlay() {
     makeNewCardDiv("dealer")
     newDiv.classList.add(mysteryCard)
     while (dealersHandValue <= 17) {
-    pickCard()
-    determineCardValue(card)
-    dealersHandValue = dealersHandValue + cardValue
-    makeNewCardDiv("dealer")
-    newDiv.classList.add(card)
-}
+        pickCard()
+        determineCardValue(card)
+        dealersHandValue = dealersHandValue + cardValue
+        makeNewCardDiv("dealer")
+        newDiv.classList.add(card)
+        }
+        console.log(dealersHandValue)
+    if (dealersHandValue > 21) {
+        console.log("TEST")
+        dealerBust = true
+        playerWin()
+    } else {
     determineWinner()
+    }
 }
 
 function determineWinner() {
-    
+    if (dealersHandValue > playersHandValue) {
+        playerLose()
+    } else if (playersHandValue > dealersHandValue) {
+        playerWin()
+    } else if (playersHandValue === dealersHandValue) {
+        push()
+    }
 }
+console.log(messageEl)
