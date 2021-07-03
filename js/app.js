@@ -58,7 +58,6 @@ resetBetBtnEl.addEventListener("click", () => {
     currentBetBalEl.innerHTML = `Your current Bet Balance is: $${bet}`
 })
 betSubmitEl.addEventListener("click", ()=> {
-    wallet = wallet - bet
     init()
     initalCardDealing()
 })
@@ -94,14 +93,14 @@ resetBtn.addEventListener("click", () => {
     betDivEl.style.visibility = "inherit"
     resetBtn.remove()
     currentBetBalEl.innerHTML = `Your current Bet Balance is: $${bet}`
-    currentBalMesEl = `Your current balance is: $${wallet}`
+    document.querySelector("h4").innerHTML = `Your current balance is: $${wallet}`
     })
 
 
 // Functions
 function init () {
-    if (bet < 50) {
-        currentBetBalEl.innerHTML = `You can't Place a Bet less than $50! Add more money!`
+    if (bet < 25) {
+        currentBetBalEl.innerHTML = `You can't Place a Bet less than $25! Add more money!`
     }else if (bet > wallet) {
         currentBetBalEl.innerHTML = `You can't bet more money then you have!`
     } else{
