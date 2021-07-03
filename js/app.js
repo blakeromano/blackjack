@@ -18,6 +18,7 @@
 
 // NOTE: ace should be a save card where if the player/dealer has one but their value is over 21 that the value of their deck gets decreased by 10 next to work on
 // Variables
+let aces = ["dA", "hA", "cA", "sA"]
 let wallet = 10000
 let bet = null
 let deck = [[], [], [], [], []]
@@ -138,7 +139,7 @@ function initalCardDealing() {
     console.log(dealersHandValue)
     if (playersHandValue === 21) {
         blackjack = true
-        playerWin()
+        renderWinner("playerWin")
     }
 }
 
@@ -197,9 +198,15 @@ function playerHit () {
     newDiv.classList.add(card)
     determineCardValue(card)
     playersHandValue = playersHandValue + cardValue
+    playersHand.push(card)
     if (playersHandValue > 21) {
-        playerBust = true
-        playerLose()
+        if( playersHand.includes("dA") || playersHand.includes("hA") || playersHand.includes("cA") || playersHand.includes("sA")) {
+            playersHandValue = playersHandValue - 10
+            playersHand = playersHand.filter(card => !aces.includes(card))
+        } else {
+            playerBust = true
+            renderWinner("playerLose")
+        }
     }
 }
 // forces dealer to play
@@ -216,25 +223,31 @@ function playerDoubleDown() {
     newDiv.classList.add(card)
     determineCardValue(card)
     playersHandValue = playersHandValue + cardValue
+    playersHand.push(card)
+    if (playersHandValue > 21) {
+        if( playersHand.includes("dA") || playersHand.includes("hA") || playersHand.includes("cA") || playersHand.includes("sA")) {
+            playersHandValue = playersHandValue - 10
+        }
+    }
     if (playersHandValue > 21) {
         playerBust = true
-        playerLose()
+        renderWinner("playerLose")
     } else {
         dealerPlay()
     }
 }
 // Shows that player won
-function playerWin () {
-    messageEl.innerHTML = "PLAYER WINS!"
-}
-// Shows that player lost
-function playerLose () {
-    messageEl.innerHTML = "DEALER WINS!"
-}
-// Shows that player tied with dealer AKA pushed
-function push () {
-    messageEl.innerHTML = "PUSH!"
-}
+
+function renderWinner(winStatus) {
+    if (winStatus === "playerLose") {
+        messageEl.innerHTML = "DEALER WON!"
+    } else if (winStatus === "playerWin") {
+        messageEl.innerHTML = "PLAYER WON!"
+    } else if (winStatus === "push") {
+        messageEl.innerHTML = "PUSH!"
+    }
+} 
+
 // Dealer has to play once player stands or if they double down, only done if player hasn't busted
 function dealerPlay() {
     playersChoices.forEach(btn => {
@@ -251,23 +264,28 @@ function dealerPlay() {
         dealersHandValue = dealersHandValue + cardValue
         makeNewCardDiv("dealer")
         newDiv.classList.add(card)
-        }
         console.log(dealersHandValue)
-    if (dealersHandValue > 21) {
-        console.log("TEST")
-        dealerBust = true
-        playerWin()
-    } else {
-    determineWinner()
+        if (dealersHandValue > 21) {
+            if (dealersHand.includes("hA") || dealersHand.includes("sA") || dealersHand.includes("cA") || dealersHand.includes("dA")) {
+                dealersHandValue = dealersHandValue - 10
+                dealersHand = dealersHand.filter(card => aces.includes(card))
+            } else {
+                console.log("TEST")
+                dealerBust = true
+                renderWinner("playerWin")
+            }
+        }
     }
+    if (dealerbust !== true || playerBust !== true)
+        determineWinner()
 }
 // Determines winner if neither dealer or player bust
 function determineWinner() {
     if (dealersHandValue > playersHandValue) {
-        playerLose()
-    } else if (playersHandValue > dealersHandValue) {
-        playerWin()
+        renderWinner("playerLose")
+     } else if (playersHandValue > dealersHandValue) {
+        renderWinner("playerWin")
     } else if (playersHandValue === dealersHandValue) {
-        push()
+        renderWinner("push")
     }
 }
