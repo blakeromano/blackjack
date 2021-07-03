@@ -258,7 +258,7 @@ function dealerPlay() {
     makeNewCardDiv("dealer")
     newDiv.classList.add(mysteryCard)
     // Makes dealer pick a card until the value of their hand is over 17
-    while (dealersHandValue <= 17) {
+    while (dealersHandValue <= 16) {
         pickCard()
         determineCardValue(card)
         dealersHandValue = dealersHandValue + cardValue
@@ -268,7 +268,8 @@ function dealerPlay() {
         if (dealersHandValue > 21) {
             if (dealersHand.includes("hA") || dealersHand.includes("sA") || dealersHand.includes("cA") || dealersHand.includes("dA")) {
                 dealersHandValue = dealersHandValue - 10
-                dealersHand = dealersHand.filter(card => aces.includes(card))
+                dealersHand = dealersHand.filter(card => !aces.includes(card))
+                console.log(dealersHand)
             } else {
                 console.log("TEST")
                 dealerBust = true
@@ -276,7 +277,7 @@ function dealerPlay() {
             }
         }
     }
-    if (dealerbust !== true || playerBust !== true)
+    if (dealerBust !== true || playerBust !== true)
         determineWinner()
 }
 // Determines winner if neither dealer or player bust
