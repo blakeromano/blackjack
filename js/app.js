@@ -16,7 +16,6 @@
 
 
 
-// NOTE: ace should be a save card where if the player/dealer has one but their value is over 21 that the value of their deck gets decreased by 10 next to work on
 // Variables
 let aces = ["dA", "hA", "cA", "sA"]
 let wallet = 10000
@@ -47,6 +46,7 @@ let resetBetBtnEl = document.querySelector("#bet-reset")
 let playersChoices = document.querySelectorAll(".players-choices")
 let controlsEl = document.querySelector(".controls")
 let messageEl = document.querySelector("#message")
+let resetBtn = document.querySelector(".reset")
 // Event Listeners
 chipSectionEl.addEventListener("click", function(el) {
     let chipSelected = Number(el.target.id)
@@ -58,6 +58,7 @@ resetBetBtnEl.addEventListener("click", () => {
     currentBetBalEl.innerHTML = `Your current Bet Balance is: $${bet}`
 })
 betSubmitEl.addEventListener("click", ()=> {
+    wallet = wallet - bet
     init()
     initalCardDealing()
 })
@@ -71,6 +72,30 @@ controlsEl.addEventListener("click", (el) => {
         playerDoubleDown()
     } else {}
 })
+
+resetBtn.addEventListener("click", () => {
+    playersHand = []
+    dealersHand = []
+    playersHandValue = 0
+    dealersHandValue = 0
+    playerBust = false
+    dealerBust = false
+    blackjack = false
+    theyDoubledDown = false
+    card = ""
+    cardValue = null
+    mysteryCard = ""
+    bet = 0
+    playersHandEl.innerHTML = ""
+    dealersHandEl.innerHTML = ""
+    messageEl.style.visibility = "hidden"
+    dealersHandEl.style.visibility = "hidden"
+    playersHandEl.style.visibility = "inherit"
+    betDivEl.style.visibility = "inherit"
+    resetBtn.remove()
+    currentBetBalEl.innerHTML = `Your current Bet Balance is: $${bet}`
+    currentBalMesEl = `Your current balance is: $${wallet}`
+    })
 
 
 // Functions
@@ -135,8 +160,6 @@ function initalCardDealing() {
     playersHandValue = playersHandValue + cardValue
     makeNewCardDiv("player")
     newDiv.classList.add(card)
-    console.log(playersHandValue)
-    console.log(dealersHandValue)
     if (playersHandValue === 21) {
         blackjack = true
         renderWinner("playerWin")
@@ -217,7 +240,6 @@ function playerStand () {
 function playerDoubleDown() {
     wallet = wallet - bet
     theyDoubledDown = true
-    console.log(wallet)
     pickCard()
     makeNewCardDiv("player")
     newDiv.classList.add(card)
@@ -239,12 +261,22 @@ function playerDoubleDown() {
 // Shows that player won
 
 function renderWinner(winStatus) {
+    playersChoices.forEach(btn => btn.style.visibility = "hidden")
+    resetBtn.style.visibility = "inherit"
+    messageEl.style.visibility = "inherit"
     if (winStatus === "playerLose") {
         messageEl.innerHTML = "DEALER WON!"
-    } else if (winStatus === "playerWin") {
+    } else if (winStatus === "playerWin" && theyDoubledDown === true) {
         messageEl.innerHTML = "PLAYER WON!"
+        wallet = wallet + (bet * 4)
+        console.log(wallet)
     } else if (winStatus === "push") {
         messageEl.innerHTML = "PUSH!"
+        wallet = wallet + bet
+    } else if (winStatus === "playerWin" && theyDoubledDown === false) {
+        messageEl.innerHTML = "PLAYER WON!"
+        wallet = wallet + (bet * 2)
+        console.log(wallet)
     }
 } 
 
@@ -257,28 +289,29 @@ function dealerPlay() {
     mysteryCardEl.remove()
     makeNewCardDiv("dealer")
     newDiv.classList.add(mysteryCard)
-    // Makes dealer pick a card until the value of their hand is over 17
+    // Makes dealer pick a card until the value of their hand is 17 or more
     while (dealersHandValue <= 16) {
         pickCard()
         determineCardValue(card)
         dealersHandValue = dealersHandValue + cardValue
         makeNewCardDiv("dealer")
         newDiv.classList.add(card)
-        console.log(dealersHandValue)
+        dealersHand.push(card)
         if (dealersHandValue > 21) {
             if (dealersHand.includes("hA") || dealersHand.includes("sA") || dealersHand.includes("cA") || dealersHand.includes("dA")) {
                 dealersHandValue = dealersHandValue - 10
                 dealersHand = dealersHand.filter(card => !aces.includes(card))
                 console.log(dealersHand)
-            } else {
-                console.log("TEST")
+            } 
+            else {
                 dealerBust = true
                 renderWinner("playerWin")
             }
         }
     }
-    if (dealerBust !== true || playerBust !== true)
+    if (messageEl.innerHTML === "MESSAGE") {
         determineWinner()
+    }
 }
 // Determines winner if neither dealer or player bust
 function determineWinner() {

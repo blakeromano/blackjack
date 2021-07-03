@@ -85,6 +85,7 @@
     #message {
       color: white;
       font-size: 48px;
+      visibility: hidden;
     }
 
 
