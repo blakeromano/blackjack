@@ -20,7 +20,14 @@
 let aces = ["dA", "hA", "cA", "sA"]
 let wallet = 10000
 let bet = null
-let deck = [[], [], [], [], []]
+let deck = [
+    ["dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"],
+    ["dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"],
+    ["dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"],
+    ["dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"],
+    ["dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"],
+    ["dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"],
+]
 let playersHand = []
 let dealersHand = []
 let playersHandValue = null
@@ -33,6 +40,8 @@ let theyDoubledDown = false
 let playerBust = false
 let dealerBust = false
 let blackjack = false
+let aceCountPlayer = 0
+let aceCountDealer = 0
 // Cached Reference Elements
 let currentBalMesEl = document.querySelector("#current-balance")
 let betInputEl = document.querySelector('#bet-input')
@@ -85,13 +94,16 @@ resetBtn.addEventListener("click", () => {
     cardValue = null
     mysteryCard = ""
     bet = 0
+    aceCountDealer = 0
+    aceCountPlayer = 0
     playersHandEl.innerHTML = ""
     dealersHandEl.innerHTML = ""
+    messageEl.innerHTML = "MESSAGE"
     messageEl.style.visibility = "hidden"
     dealersHandEl.style.visibility = "hidden"
     playersHandEl.style.visibility = "inherit"
     betDivEl.style.visibility = "inherit"
-    resetBtn.remove()
+    resetBtn.style.visibility = "hidden"
     currentBetBalEl.innerHTML = `Your current Bet Balance is: $${bet}`
     document.querySelector("h4").innerHTML = `Your current balance is: $${wallet}`
     })
@@ -111,14 +123,6 @@ function init () {
         playersChoices.forEach(btn => {
             btn.style.visibility = "inherit"
         })
-        deck = [
-            ["dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"],
-            ["dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"],
-            ["dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"],
-            ["dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"],
-            ["dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"],
-            ["dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"],
-        ]
     }
 }
 
@@ -132,19 +136,19 @@ function pickCard() {
 function initalCardDealing() {
     pickCard()
     dealersHand.push(card)
-    determineCardValue(card)
+    determineCardValue(card, "dealer")
     dealersHandValue = dealersHandValue + cardValue
     makeNewCardDiv("dealer")
     newDiv.classList.add(card)
     pickCard()
     playersHand.push(card)
-    determineCardValue(card)
+    determineCardValue(card, "player")
     playersHandValue = playersHandValue + cardValue
     makeNewCardDiv("player")
     newDiv.classList.add(card)
     pickCard()
     dealersHand.push(card)
-    determineCardValue(card)
+    determineCardValue(card, "dealer")
     dealersHandValue = dealersHandValue + cardValue
     makeNewCardDiv("dealer")
     mysteryCard = card
@@ -155,13 +159,20 @@ function initalCardDealing() {
     }
     pickCard()
     playersHand.push(card)
-    determineCardValue(card)
+    determineCardValue(card, "player")
     playersHandValue = playersHandValue + cardValue
     makeNewCardDiv("player")
     newDiv.classList.add(card)
     if (playersHandValue === 21) {
         blackjack = true
         renderWinner("playerWin")
+    }
+    if (dealersHandValue > 21) {
+        aceCountDealer = aceCountDealer - 1
+        dealersHandValue = dealersHandValue - 10
+    }
+    if (playersHandValue === 21 && dealersHandValue === 21) {
+        renderWinner("push")
     }
 }
 
@@ -176,9 +187,15 @@ function makeNewCardDiv (personRecievingCard) {
     }
 }
 
-function determineCardValue (card) {
+function determineCardValue (card, p) {
     if (card === "dA" || card === "hA" || card ==="cA" || card === "sA"){
-        cardValue = 11;
+        if (p === "player") {
+            aceCountPlayer ++
+            cardValue = 11
+        } else {
+            aceCountDealer ++
+            cardValue = 11
+        }
     }
     if (card === "dQ" || card === "hQ" || card === "cQ" || card === "sQ" ||
     card === "dK" || card === "hK" || card === "cK" || card === "sK" ||
@@ -218,13 +235,13 @@ function playerHit () {
     pickCard()
     makeNewCardDiv("player")
     newDiv.classList.add(card)
-    determineCardValue(card)
+    determineCardValue(card, "player")
     playersHandValue = playersHandValue + cardValue
     playersHand.push(card)
     if (playersHandValue > 21) {
-        if( playersHand.includes("dA") || playersHand.includes("hA") || playersHand.includes("cA") || playersHand.includes("sA")) {
+        if(aceCountPlayer > 0) {
             playersHandValue = playersHandValue - 10
-            playersHand = playersHand.filter(card => !aces.includes(card))
+            aceCountPlayer = aceCountPlayer - 1
         } else {
             playerBust = true
             renderWinner("playerLose")
@@ -246,13 +263,13 @@ function playerDoubleDown() {
     playersHandValue = playersHandValue + cardValue
     playersHand.push(card)
     if (playersHandValue > 21) {
-        if( playersHand.includes("dA") || playersHand.includes("hA") || playersHand.includes("cA") || playersHand.includes("sA")) {
+        if(aceCountPlayer > 0) {
             playersHandValue = playersHandValue - 10
+            aceCountPlayer = aceCountPlayer - 1
+        } else {
+            playerBust = true
+            renderWinner("playerLose")
         }
-    }
-    if (playersHandValue > 21) {
-        playerBust = true
-        renderWinner("playerLose")
     } else {
         dealerPlay()
     }
@@ -268,14 +285,12 @@ function renderWinner(winStatus) {
     } else if (winStatus === "playerWin" && theyDoubledDown === true) {
         messageEl.innerHTML = "PLAYER WON!"
         wallet = wallet + (bet * 4)
-        console.log(wallet)
     } else if (winStatus === "push") {
         messageEl.innerHTML = "PUSH!"
         wallet = wallet + bet
     } else if (winStatus === "playerWin" && theyDoubledDown === false) {
         messageEl.innerHTML = "PLAYER WON!"
         wallet = wallet + (bet * 2)
-        console.log(wallet)
     }
 } 
 
@@ -291,16 +306,15 @@ function dealerPlay() {
     // Makes dealer pick a card until the value of their hand is 17 or more
     while (dealersHandValue <= 16) {
         pickCard()
-        determineCardValue(card)
+        determineCardValue(card, "dealer")
         dealersHandValue = dealersHandValue + cardValue
         makeNewCardDiv("dealer")
         newDiv.classList.add(card)
         dealersHand.push(card)
         if (dealersHandValue > 21) {
-            if (dealersHand.includes("hA") || dealersHand.includes("sA") || dealersHand.includes("cA") || dealersHand.includes("dA")) {
+            if (aceCountDealer > 0) {
                 dealersHandValue = dealersHandValue - 10
-                dealersHand = dealersHand.filter(card => !aces.includes(card))
-                console.log(dealersHand)
+                aceCountDealer = aceCountDealer - 1
             } 
             else {
                 dealerBust = true
