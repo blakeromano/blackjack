@@ -13,7 +13,10 @@
 // 12) Have a reset everything button which will reload the game so user can input a wallet balance again etc;
 // 13) Add event listeners for buttons to start game, startround, hit, split, doubledown, stand, new round buttons and invoke the needed functions in the eventlistener.  
 // CHALLENGES: If possible I would like to add the following to BlackJack: AI Users to play with, ability to split hand, Card animations for dealing and shuffling with noises, a timer for user to have to select option, Add time between card's being dealt to add some realism
-
+// AUDIO ELEMENTS
+let dealCardAudio = new Audio("./sounds/dealCard.wav")
+let casinoNoise = new Audio("./sounds/casinoNoise.mp3")
+dealCardAudio.volume = 0.2
 
 
 // Variables
@@ -111,6 +114,9 @@ resetBtn.addEventListener("click", () => {
 
 // Functions
 function init () {
+    casinoNoise.play()
+    casinoNoise.loop = true
+    casinoNoise.volume = 0.03
     if (bet < 25) {
         currentBetBalEl.innerHTML = `You can't Place a Bet less than $25! Add more money!`
     }else if (bet > wallet) {
@@ -134,46 +140,58 @@ function pickCard() {
 }
 
 function initalCardDealing() {
+    dealCardAudio.play()
     pickCard()
     dealersHand.push(card)
     determineCardValue(card, "dealer")
     dealersHandValue = dealersHandValue + cardValue
     makeNewCardDiv("dealer")
     newDiv.classList.add(card)
-    pickCard()
-    playersHand.push(card)
-    determineCardValue(card, "player")
-    playersHandValue = playersHandValue + cardValue
-    makeNewCardDiv("player")
-    newDiv.classList.add(card)
-    pickCard()
-    dealersHand.push(card)
-    determineCardValue(card, "dealer")
-    dealersHandValue = dealersHandValue + cardValue
-    makeNewCardDiv("dealer")
-    mysteryCard = card
-    if (card.includes("d") || card.includes("h")) {
-        newDiv.classList.add("back-red", "mystery-card")
-    } else if (card.includes("c") || card.includes("s")) {
-        newDiv.classList.add("back-blue", "mystery-card")
-    }
-    pickCard()
-    playersHand.push(card)
-    determineCardValue(card, "player")
-    playersHandValue = playersHandValue + cardValue
-    makeNewCardDiv("player")
-    newDiv.classList.add(card)
-    if (playersHandValue === 21) {
-        blackjack = true
-        renderWinner("playerWin")
-    }
-    if (dealersHandValue > 21) {
-        aceCountDealer = aceCountDealer - 1
-        dealersHandValue = dealersHandValue - 10
-    }
-    if (playersHandValue === 21 && dealersHandValue === 21) {
-        renderWinner("push")
-    }
+    setTimeout(() => {
+        dealCardAudio.play()
+        pickCard()
+        playersHand.push(card)
+        determineCardValue(card, "player")
+        playersHandValue = playersHandValue + cardValue
+        makeNewCardDiv("player")
+        newDiv.classList.add(card)
+    }, 1000)
+    setTimeout(() => {
+        dealCardAudio.play()
+        pickCard()
+        dealersHand.push(card)
+        determineCardValue(card, "dealer")
+        dealersHandValue = dealersHandValue + cardValue
+        makeNewCardDiv("dealer")
+        mysteryCard = card
+        if (card.includes("d") || card.includes("h")) {
+            newDiv.classList.add("back-red", "mystery-card")
+        } else if (card.includes("c") || card.includes("s")) {
+            newDiv.classList.add("back-blue", "mystery-card")
+        }
+    }, 2000)
+    setTimeout(() => {
+        dealCardAudio.play()
+        pickCard()
+        playersHand.push(card)
+        determineCardValue(card, "player")
+        playersHandValue = playersHandValue + cardValue
+        makeNewCardDiv("player")
+        newDiv.classList.add(card)
+    }, 3000)
+    setTimeout(() => {
+        if (playersHandValue === 21) {
+            blackjack = true
+            renderWinner("playerWin")
+        }
+        if (dealersHandValue > 21) {
+            aceCountDealer = aceCountDealer - 1
+            dealersHandValue = dealersHandValue - 10
+        }
+        if (playersHandValue === 21 && dealersHandValue === 21) {
+            renderWinner("push")
+        }
+    }, 3001)
 }
 
 function makeNewCardDiv (personRecievingCard) {
@@ -232,6 +250,7 @@ function determineCardValue (card, p) {
 }
 // has player take a new card 
 function playerHit () {
+    dealCardAudio.play()
     pickCard()
     makeNewCardDiv("player")
     newDiv.classList.add(card)
@@ -254,6 +273,7 @@ function playerStand () {
 }
 // doubles player bet and automatically makes them stand after hitting
 function playerDoubleDown() {
+    dealCardAudio.play()
     wallet = wallet - bet
     theyDoubledDown = true
     pickCard()
@@ -305,6 +325,7 @@ function dealerPlay() {
     newDiv.classList.add(mysteryCard)
     // Makes dealer pick a card until the value of their hand is 17 or more
     while (dealersHandValue <= 16) {
+        setTimeout(1000)
         pickCard()
         determineCardValue(card, "dealer")
         dealersHandValue = dealersHandValue + cardValue
