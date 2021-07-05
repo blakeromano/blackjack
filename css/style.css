@@ -14,10 +14,10 @@
   }
   .blackjack-table {
     position: relative;
-    clip-path: ellipse(85% 70vh at 50% 40px);
-    transform: rotateX(30deg);
-    overflow: hidden;
-    background: green;
+    top: -50px;
+    clip-path: ellipse(85% 85vh at 50% 40px);
+    transform: rotateX(40deg);
+    background-color: rgb(0, 65, 0);
     height: 100%;
     width: 75vw;
     margin: 0 auto;
@@ -35,13 +35,13 @@
     justify-content: center;
   }
   #betting-menu {
-      align-items: flex-end;
       width: max-content;
       text-align: center;
       padding: 10px;
       border: white 5px solid;
       color: white;
       background-color: gray;
+      height: max-content;
 }
     #dealers-hand {
         margin-top: -200px;

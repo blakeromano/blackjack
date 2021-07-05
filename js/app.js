@@ -69,7 +69,7 @@ resetBetBtnEl.addEventListener("click", () => {
     bet = 0
     currentBetBalEl.innerHTML = `Your current Bet Balance is: $${bet}`
 })
-betSubmitEl.addEventListener("click", ()=> {
+betSubmitEl.addEventListener("click", () => {
     init()
     initalCardDealing()
 })
@@ -125,6 +125,8 @@ function init () {
         dealersHandEl.style.visibility = "inherit"
         playersHandEl.style.visibility = "inherit"
         betDivEl.style.visibility = "hidden"
+        betDivEl.style.width = "0"
+        betDivEl.style.height = "0"
         wallet = wallet - bet
         playersChoices.forEach(btn => {
             btn.style.visibility = "inherit"
@@ -325,7 +327,6 @@ function dealerPlay() {
     newDiv.classList.add(mysteryCard)
     // Makes dealer pick a card until the value of their hand is 17 or more
     while (dealersHandValue <= 16) {
-        setTimeout(1000)
         pickCard()
         determineCardValue(card, "dealer")
         dealersHandValue = dealersHandValue + cardValue
