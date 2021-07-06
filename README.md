@@ -13,7 +13,7 @@ I have always loved Blackjack and now that I will soon be Twenty One I figured n
 * CSS Inspiration: 
 * Sounds:
 
-## Wireframe 
+## Psuedocode 
 1. Define our cached elements including divs, messages given to the user, betting ability etc;
 2. Define our required variables, this is going to include an array for our cards in the deck, players hand, dealers hand, value of bet, how much money is in the players wallet, and isWinner
 3. Create an initialize function which will set up the deck, this will be called after the user inputs a starting wallet value with a valid number and has submitted it where we will add that value to the wallet and hide that div.
@@ -28,6 +28,7 @@ I have always loved Blackjack and now that I will soon be Twenty One I figured n
 12. Have a reset everything button which will reload the game so user can input a wallet balance again etc;
 13. Add event listeners for buttons to start game, startround, hit, split, doubledown, stand, new round buttons and invoke the needed functions in the eventlistener.  
 
-## Psuedocode
-
+## Wireframe
+### [Wireframe Link] (https://wireframe.cc/3ud7AK)
+![Wireframe] (https://raw.githubusercontent.com/blakeromano/blackjack/main/ReadMe-Pictures/Wireframe.png)
 ## Next Steps
