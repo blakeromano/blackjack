@@ -6,17 +6,23 @@
   }
   body {
     background: rgb(0, 0, 0);
+    width: 100vw;
+    height: 100vh;
   }
   .container {
-    width: 140vh;
+    display: flex;
+    /* width: 10000vh; */
     height: 90vh;
     perspective: 700px;
     margin-top: -90px;
+    margin-right: 150px;
+    margin-left: 150px;
   }
   .blackjack-table {
-    position: relative;
+    justify-content: center;
+    position: absolute;
     top: -50px;
-    clip-path: ellipse(85% 700px at 50% 10px);
+    clip-path: ellipse(87% 750px at 50% 10px);
     transform: rotateX(35deg);
     background-color: rgb(0, 65, 0);
     height: 100%;
@@ -25,8 +31,8 @@
   }
   .table-overlay {
     color: #fff;
-    width: 100%;
-    height: 100%;
+    width: 0;
+    height: 0;
     position: absolute;
     text-align: center;
     padding-top: 4rem;
