@@ -29,6 +29,6 @@ I have always loved Blackjack and now that I will soon be Twenty One I figured n
 13. Add event listeners for buttons to start game, startround, hit, split, doubledown, stand, new round buttons and invoke the needed functions in the eventlistener.  
 
 ## Wireframe
-### [Wireframe Link] (https://wireframe.cc/3ud7AK)
+[Wireframe Link] (https://wireframe.cc/3ud7AK)
 ![Wireframe] (https://raw.githubusercontent.com/blakeromano/blackjack/main/ReadMe-Pictures/Wireframe.png)
 ## Next Steps
