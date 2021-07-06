@@ -108,6 +108,118 @@
       justify-content: center;
     }
 
+    @media only screen and (max-width: 750px) {
+      * {
+        margin: 0;
+        border: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: rgb(0, 0, 0);
+        width: 95vw;
+        height: 92vh;
+      }
+      .container {
+        display: flex;
+        height: 90vh;
+        perspective: 1000px;
+        margin-top: 0px;
+        margin-right: 0px;
+        margin-left: 0px;
+      }
+      .blackjack-table {
+        justify-content: center;
+        position: absolute;
+        top: 0px;
+        clip-path: ellipse(100% 100% at 50% 50%);
+        transform: rotateX(0deg);
+        background-color: rgb(0, 65, 0);
+        height: 85vh;
+        width: 95vw;
+        
+      }
+      .table-overlay {
+        color: #fff;
+        width: 0;
+        height: 0;
+        position: absolute;
+        text-align: center;
+        padding-top: 4rem;
+        font-size: 3vw;
+        display: grid;
+        justify-content: center;
+      }
+      #betting-menu {
+          width: max-content;
+          text-align: center;
+          padding: 10px;
+          border: white 5px solid;
+          color: white;
+          background-color: gray;
+          height: max-content;
+    }
+        #dealers-hand {
+            margin-top: -10px;
+            border: red dotted 3px;
+            height: 125px;
+            width: 600px;
+            margin-bottom: -150px;
+            visibility: hidden;
+        }
+        #players-hand{
+            margin-top: 100px;
+            border: 3px dashed blue;
+            height: 125px;
+            width: 600px;
+            visibility: hidden;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+        }
+        .players-choices {
+        visibility: hidden;
+        position: relative;
+        padding-left: 5px;
+        padding-right: 5px;
+        margin-left: 5px;
+        margin: 0px;
+        width: 0px;
+        height: 0px;
+        padding: 0px;
+        border: 0px outset whitesmoke;
+        border-radius: 15px;
+        background-color: black;
+        color: whitesmoke;
+        justify-content: center;
+        }
+        .chips {
+            width: 75px;
+            height: 75px;
+        }
+        #message {
+          color: white;
+          font-size: 48px;
+          visibility: hidden;
+          text-align: center;
+        }
+        .reset {
+          visibility: hidden;
+          position: relative;
+          margin: 0px;
+          width: 0px;
+          height: 0px;
+          padding: 0px;
+          border: 0px outset whitesmoke;
+          border-radius: 15px;
+          background-color: black;
+          color: whitesmoke;
+          justify-content: center;
+        }
+    }
+
+
   .card {
       box-sizing: border-box;
       display: inline-block;
