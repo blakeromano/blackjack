@@ -3,8 +3,8 @@
 I have always loved Blackjack and now that I will soon be Twenty One I figured now is the best time to create my own game of Blackjack which I have always loved!
 ## Screenshot:
 ![Screenshot 1](https://raw.githubusercontent.com/blakeromano/blackjack/main/ReadMe-Pictures/Game-Screenshot-One.png)
-![Screenshot 2](https://imgur.com/a/CYnvPnH)
-![Screenshot 3](https://imgur.com/a/cExpDiV)
+![Screenshot 2](https://raw.githubusercontent.com/blakeromano/blackjack/main/ReadMe-Pictures/Game-Screenshot-Two.png)
+![Screenshot 3](https://raw.githubusercontent.com/blakeromano/blackjack/main/ReadMe-Pictures/Game-Screenshot-Three.png)
 ## Technologies Used
 * HTML
 * CSS
