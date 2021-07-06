@@ -58,9 +58,11 @@ let resetBtn = document.querySelector(".reset")
 let tableOverlayEl = document.querySelector(".table-overlay")
 // Event Listeners
 chipSectionEl.addEventListener("click", function(el) {
+    if (el.target.id === "10" || el.target.id === "25" || el.target.id === "50" || el.target.id === "100" || el.target.id === "500"){
     let chipSelected = Number(el.target.id)
     bet = chipSelected + bet
     currentBetBalEl.innerHTML = `Your current Bet Balance is: $${bet}`
+    }
 })
 resetBetBtnEl.addEventListener("click", () => {
     bet = 0
@@ -270,6 +272,7 @@ function determineCardValue (card, p) {
 }
 // has player take a new card 
 function playerHit () {
+    document.querySelector("#double-down-btn").style.visibility = "hidden"
     dealCardAudio.play()
     pickCard()
     makeNewCardDiv("player")
