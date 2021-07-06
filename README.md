@@ -10,8 +10,8 @@ I have always loved Blackjack and now that I will soon be Twenty One I figured n
 * JavaScript
 * BootStrap
 ## Attribution
-CSS Inspiration: 
-Sounds:
+* CSS Inspiration: 
+* Sounds:
 
 ## Wireframe 
 
