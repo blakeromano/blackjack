@@ -11,7 +11,6 @@
 * BootStrap
 * Github
 * Github Pages
-* 
 ## Attribution
 * CSS Inspiration: [The Frontend Dev](https://www.thefrontenddev.com/view/lets-create-a-vanilla-javascript-blackjack-game-part-1--the-board-setup-tutorial-)
 * Sounds: [Free Sounds](https://freesound.org/)
