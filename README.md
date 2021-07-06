@@ -1,6 +1,6 @@
 # Blackjack
 ## Objective:
-I have always loved Blackjack and now that I will soon be Twenty One I figured now is the best time to create my own game of Blackjack which I have always loved!
+### I have always loved Blackjack and now that I will soon be Twenty One I figured now is the best time to create my own game of Blackjack which I have always loved!
 ## Screenshot:
 ![Screenshot 1](https://raw.githubusercontent.com/blakeromano/blackjack/main/ReadMe-Pictures/Game-Screenshot-One.png)
 ![Screenshot 2](https://raw.githubusercontent.com/blakeromano/blackjack/main/ReadMe-Pictures/Game-Screenshot-Two.png)
@@ -9,9 +9,12 @@ I have always loved Blackjack and now that I will soon be Twenty One I figured n
 * CSS
 * JavaScript
 * BootStrap
+* Github
+* Github Pages
+* 
 ## Attribution
-* CSS Inspiration: 
-* Sounds:
+* CSS Inspiration: [The Frontend Dev](https://www.thefrontenddev.com/view/lets-create-a-vanilla-javascript-blackjack-game-part-1--the-board-setup-tutorial-)
+* Sounds: [Free Sounds](https://freesound.org/)
 
 ## Psuedocode 
 1. Define our cached elements including divs, messages given to the user, betting ability etc;
@@ -32,3 +35,7 @@ I have always loved Blackjack and now that I will soon be Twenty One I figured n
 [Wireframe Link](https://wireframe.cc/3ud7AK)
 ![Wireframe](https://raw.githubusercontent.com/blakeromano/blackjack/main/ReadMe-Pictures/Wireframe.png)
 ## Next Steps
+* AI Users to play with 
+* ability to split hand
+* Card animations for dealing and shuffling with noises
+* ~~Add time between card's being dealt to add some realism~~
