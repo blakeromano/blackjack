@@ -1,6 +1,6 @@
 # Blackjack
-## Objective:
-### I have always loved Blackjack and now that I will soon be Twenty One I figured now is the best time to create my own game of Blackjack which I have always loved!
+## Why I Made Blackjack
+### I am turning 21 soon and I have always enjoyed blackjack so I wanted to code it to be able to practice!
 ## Getting Started:
 ### Link to Deployed Game: [Here!](https://blakeromano.github.io/blackjack/)
 ### Instructions: Place your inital bet which has to be atleast $25, your wallet starts out with $10,000 dollars! Then you play Blackjack like normal. The dealer will stand on soft 17 or higher. Once the game is over press the Replay button and you will be able to set a new bet and start a new round.
