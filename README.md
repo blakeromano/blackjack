@@ -3,7 +3,7 @@
 ### I am turning 21 soon and I have always enjoyed blackjack so I wanted to code it to be able to practice!
 ## Getting Started:
 ### Link to Deployed Game: [Here!](https://blakeromano.github.io/blackjack/)
-### Instructions: Place your inital bet which has to be atleast $25, your wallet starts out with $10,000 dollars! Then you play Blackjack like normal. The dealer will stand on soft 17 or higher. Once the game is over press the Replay button and you will be able to set a new bet and start a new round.
+### Instructions: Place your inital bet which has to be atleast $25, your wallet starts out with $10,000 dollars! Then you play Blackjack like normal. The dealer will stand on soft 17 or higher. Once the game is over press the Replay button and you will be able to set a new bet and start a new round. The game is played with six decks and is shuffled once there are less then 75 cards in the deck.
 ## What I Learned:
 * The amount of ways to solve problems using code is astronomical and there is no right or wrong way. As long as I am able to understand and articulate to others why things work the way they do.
 * How to work with other people's existing code, in this case Ben Manley's Card Deck CSS.
