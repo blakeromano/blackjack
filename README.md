@@ -1,9 +1,19 @@
 # Blackjack
 ## Objective:
 ### I have always loved Blackjack and now that I will soon be Twenty One I figured now is the best time to create my own game of Blackjack which I have always loved!
+## Getting Started:
+### Link to Deployed Game: [Here!](https://blakeromano.github.io/blackjack/)
+### Instructions: Place your inital bet, your wallet starts out with $10,000 dollars! Then you play Blackjack like normal. The dealer will stand on soft 17 or higher. Once the game is over press the Replay button and you will be able to set a new bet and start a new round.
+## What I Learned
+* The amount of ways to solve problems using code is astronomical and there is no right or wrong way. As long as I am able to understand and articulate to others why things work the way they do.
+* How to work with other people's existing code, in this case Ben Manley's Card Deck CSS.
+* How to really use resources out on the internet like MDN and Stack Overflow to solve real problems.
+* Being able to effectively articulate a bug with only the necessary code that is being effected and to be able to invoke others to give me the key information I need to help fix other people's bugs.
+* This project showed me how there is a flow to code and how each function or process is intertwined to make a functional product.
 ## Screenshot:
 ![Screenshot 1](https://raw.githubusercontent.com/blakeromano/blackjack/main/ReadMe-Pictures/Game-Screenshot-One.png)
 ![Screenshot 2](https://raw.githubusercontent.com/blakeromano/blackjack/main/ReadMe-Pictures/Game-Screenshot-Two.png)
+
 ## Technologies Used
 * HTML
 * CSS
@@ -11,9 +21,12 @@
 * BootStrap
 * Github
 * Github Pages
+
 ## Attribution
 * CSS Inspiration: [The Frontend Dev](https://www.thefrontenddev.com/view/lets-create-a-vanilla-javascript-blackjack-game-part-1--the-board-setup-tutorial-)
-* Sounds: [Free Sounds](https://freesound.org/)
+* Card CSS: [Ben Manley](https://github.com/SEI-Remote-WC/css-card-deck)
+* Casino Sound: [Free Sounds](https://freesound.org/people/craigsmith/sounds/438129/)
+* Card Dealing Sound: [Free Sounds](https://freesound.org/people/f4ngy/sounds/240777/)
 
 ## Psuedocode 
 1. Define our cached elements including divs, messages given to the user, betting ability etc;
@@ -33,8 +46,10 @@
 ## Wireframe
 [Wireframe Link](https://wireframe.cc/3ud7AK)
 ![Wireframe](https://raw.githubusercontent.com/blakeromano/blackjack/main/ReadMe-Pictures/Wireframe.png)
+
 ## Next Steps
 * AI Users to play with 
 * ability to split hand
-* Card animations for dealing and shuffling with noises
+* Card animations for dealing
+* ~~Background noise of a casino and card noises~~
 * ~~Add time between card's being dealt to add some realism~~
