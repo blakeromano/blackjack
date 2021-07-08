@@ -4,7 +4,7 @@
 ## Getting Started:
 ### Link to Deployed Game: [Here!](https://blakeromano.github.io/blackjack/)
 ### Instructions: Place your inital bet, your wallet starts out with $10,000 dollars! Then you play Blackjack like normal. The dealer will stand on soft 17 or higher. Once the game is over press the Replay button and you will be able to set a new bet and start a new round.
-## What I Learned
+## What I Learned:
 * The amount of ways to solve problems using code is astronomical and there is no right or wrong way. As long as I am able to understand and articulate to others why things work the way they do.
 * How to work with other people's existing code, in this case Ben Manley's Card Deck CSS.
 * How to really use resources out on the internet like MDN and Stack Overflow to solve real problems.
@@ -14,7 +14,7 @@
 ![Screenshot 1](https://raw.githubusercontent.com/blakeromano/blackjack/main/ReadMe-Pictures/Game-Screenshot-One.png)
 ![Screenshot 2](https://raw.githubusercontent.com/blakeromano/blackjack/main/ReadMe-Pictures/Game-Screenshot-Two.png)
 
-## Technologies Used
+## Technologies Used:
 * HTML
 * CSS
 * JavaScript
@@ -22,13 +22,13 @@
 * Github
 * Github Pages
 
-## Attribution
+## Attributions:
 * CSS Inspiration: [The Frontend Dev](https://www.thefrontenddev.com/view/lets-create-a-vanilla-javascript-blackjack-game-part-1--the-board-setup-tutorial-)
 * Card CSS: [Ben Manley](https://github.com/SEI-Remote-WC/css-card-deck)
 * Casino Sound: [Free Sounds](https://freesound.org/people/craigsmith/sounds/438129/)
 * Card Dealing Sound: [Free Sounds](https://freesound.org/people/f4ngy/sounds/240777/)
 
-## Psuedocode 
+## Psuedocode:
 1. Define our cached elements including divs, messages given to the user, betting ability etc;
 2. Define our required variables, this is going to include an array for our cards in the deck, players hand, dealers hand, value of bet, how much money is in the players wallet, and isWinner
 3. Create an initialize function which will set up the deck, this will be called after the user inputs a starting wallet value with a valid number and has submitted it where we will add that value to the wallet and hide that div.
@@ -43,11 +43,11 @@
 12. Have a reset everything button which will reload the game so user can input a wallet balance again etc;
 13. Add event listeners for buttons to start game, startround, hit, split, doubledown, stand, new round buttons and invoke the needed functions in the eventlistener.  
 
-## Wireframe
+## Wireframe:
 [Wireframe Link](https://wireframe.cc/3ud7AK)
 ![Wireframe](https://raw.githubusercontent.com/blakeromano/blackjack/main/ReadMe-Pictures/Wireframe.png)
 
-## Next Steps
+## Next Steps:
 * AI Users to play with 
 * ability to split hand
 * Card animations for dealing
